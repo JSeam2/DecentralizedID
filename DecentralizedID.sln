@@ -1,0 +1,23 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DecentralizedIDContract", "DecentralizedIDContract\DecentralizedIDContract.csproj", "{C99F5AB2-D4A6-4F78-AC8E-6DB36E48B373}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DecentralizedIDContract.Tests", "DecentralizedIDContract.Tests\DecentralizedIDContract.Tests.csproj", "{26AF7145-B9AB-492C-B137-3FAE638D7B4C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C99F5AB2-D4A6-4F78-AC8E-6DB36E48B373}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C99F5AB2-D4A6-4F78-AC8E-6DB36E48B373}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C99F5AB2-D4A6-4F78-AC8E-6DB36E48B373}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C99F5AB2-D4A6-4F78-AC8E-6DB36E48B373}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26AF7145-B9AB-492C-B137-3FAE638D7B4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26AF7145-B9AB-492C-B137-3FAE638D7B4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26AF7145-B9AB-492C-B137-3FAE638D7B4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26AF7145-B9AB-492C-B137-3FAE638D7B4C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
