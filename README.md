@@ -157,7 +157,7 @@ partially reliable identity documents pertaining to one's identity.
 ## Further works
 Due to a lack of time I am unable to commit to building out the UI for the
 frontend. Below is the proposed frontend design. Apologies :(
-![Document Management Page]('1_documentmanagement.png')
+![Document Management Page](images/1_documentmanagement.png)
 
 
 ## Requests for Comments and Contributions
