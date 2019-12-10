@@ -107,7 +107,7 @@ occur. One is Social Media (should it be used as a identity document), and
 people copying projects and seeding payments.
 
 
-**Social Media**
+#### Social Media
 Social Media may be an unreliable source of data but it is easy to use and
 integrate as an identity document. As such, it is a useful channel to
 bootstrap the adoption such a system. An possible identity document is
@@ -127,7 +127,7 @@ announce on their own social profiles that the attacker's account is a
 fraud.  
 
 
-**Copying Projects**
+#### Copying Projects
 An attacker may copy projects and subsequently seed projects with
 payments to give the impression that the project is valid in order
 to give the impression of a valid profile. A simple way of verifying
