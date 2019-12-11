@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Linq;
 using Stratis.SmartContracts;
 
 [Deploy]
@@ -76,11 +77,15 @@ public class DecentralizedID : SmartContract
 
     //public ulong[] GetOwnerDIDs(Address ownerAddress)
     //{
-    //    return this.PersistentState.GetArray<ulong>($"DIDArray:{ownerAddress}");
+    //    ulong[] data = this.PersistentState.GetArray<ulong>($"DIDArray:{ownerAddress}");
+
+    //    return data;
+
     //}
 
-    //public void setOwnerDIDs(Address ownerAddress, ulong[] value)
+    //public void SetOwnerDIDs(Address ownerAddress, ulong[] value)
     //{
+    //    //byte[] SerializedData = Serializer.Serialize(value);
     //    this.PersistentState.SetArray($"DIDArray:{ownerAddress}", value);
     //}
 
@@ -94,28 +99,68 @@ public class DecentralizedID : SmartContract
     /// <summary>
     /// Create and associate DID
     /// </summary>
-    /// <param name="data">String data associated with the DID</param>
+    /// <param name="data">String data associated with the DID</param>ma
     public void CreateDID(string data)
     {
         SetDataOfDID(this.Index, data);
         SetOwnerOfDID(this.Index, this.Message.Sender);
 
-        Log(new CreatedDID { DIDIndex = this.Index, DIDOwner = this.Message.Sender.ToString() });
+        // Handle DID Array
+        //ulong[] DIDArray = GetOwnerDIDs(this.Message.Sender);
+        //Array.Resize(ref DIDArray, DIDArray.Length + 1);
+        //DIDArray[DIDArray.Length] = this.Index;
+        //SetOwnerDIDs(this.Message.Sender, DIDArray);
+
+        Log(new CreateDIDEvent {
+            DIDIndex = this.Index,
+            DIDOwner = this.Message.Sender.ToString(),
+            active = true
+        });
 
         this.Index++;
 
     }
 
-    public void RevokeDID()
+    /// <summary>
+    /// Revoke DID and set string data to empty string and set OwnerAddress to
+    /// Zero
+    /// </summary>
+    /// <param name="data">String data associated with the DID</param>
+    public void RevokeDID(ulong DIDIndex)
     {
-        // Check if the 
-        S
+        // Check if the DID belongs to the sender
+        Assert(GetOwnerOfDID(DIDIndex) == this.Message.Sender);
+
+        SetDataOfDID(DIDIndex, "");
+        SetOwnerOfDID(DIDIndex, Address.Zero);
+
+        // Handle DID Array
+        //ulong[] DIDArray = GetOwnerDIDs(this.Message.Sender);
+        //int numIndex = Array.IndexOf(DIDArray, DIDIndex);
+        //DIDArray = DIDArray.Where((val, idx) => idx != numIndex).ToArray();
+        //SetOwnerDIDs(this.Message.Sender, DIDArray);
+
+        Log(new RevokeDIDEvent
+        {
+            DIDIndex = DIDIndex,
+            DIDOwner = this.Message.Sender.ToString(),
+            active = false
+        });
     }
 
-    public struct CreatedDID
+    public struct CreateDIDEvent
     {
         [Index]
         public ulong DIDIndex;
         public string DIDOwner;
+        public bool active;
+    }
+
+    public struct RevokeDIDEvent
+    {
+        [Index]
+        public ulong DIDIndex;
+        public string DIDOwner;
+        public bool active;
     }
 }
