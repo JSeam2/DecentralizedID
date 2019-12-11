@@ -1,103 +1,121 @@
-﻿using System;
+﻿using System.Text;
 using Stratis.SmartContracts;
 
-/// <summary>
-/// An extension to the "Hello World" smart contract
-/// </summary>
 [Deploy]
-public class HelloWorld2 : SmartContract
+public class DecentralizedID : SmartContract
 {
-    private int Index
+
+    public Address SmartContractOwner
     {
         get
         {
-            return this.PersistentState.GetInt32("Index");
+            return this.PersistentState.GetAddress("SmartContractOwner");
         }
-        set
+        private set
         {
-            this.PersistentState.SetInt32("Index", value);
+            this.PersistentState.SetAddress("SmartContractOwner", value);
         }
     }
 
-    private int Bounds
+    /// <summary>
+    /// Index for DID
+    /// </summary>
+    private ulong Index
     {
         get
         {
-            return this.PersistentState.GetInt32("Bounds");
+            return this.PersistentState.GetUInt64("Index");
         }
         set
         {
-            this.PersistentState.SetInt32("Bounds", value);
+            this.PersistentState.SetUInt64("Index", value);
         }
     }
 
-    private string Greeting
+    /// <summary>
+    /// Get the owner's address given a DID address
+    /// </summary>
+    /// <param name="DIDIndex">Index of DID</param>
+    /// <returns>Owner's address given the DIDIndex provided</returns>
+    public Address GetOwnerOfDID(ulong DIDIndex)
     {
-        get
-        {
-            this.Index++;
-            if (this.Index >= this.Bounds)
-            {
-                this.Index = 0;
-            }
-
-            return this.PersistentState.GetString("Greeting" + this.Index);
-        }
-        set
-        {
-            this.PersistentState.SetString("Greeting" + this.Bounds, value);
-            this.Bounds++;
-        }
+        return this.PersistentState.GetAddress($"Owner:{DIDIndex}");
     }
 
-    public HelloWorld2(ISmartContractState smartContractState) : base(smartContractState)
+    /// <summary>
+    /// Set the owner's address to link to a DID address
+    /// </summary>
+    /// <param name="DIDIndex">Index of DID</param>
+    /// <param name="ownerAddress">Owner of DID wallet address</param>
+    private void SetOwnerOfDID(ulong DIDIndex, Address ownerAddress)
     {
-        this.Bounds = 0;
-        this.Index = -1;
-        this.Greeting = "Hello World!";
+        this.PersistentState.SetAddress($"Owner:{DIDIndex}", ownerAddress);
     }
 
-    public string SayHello()
+    /// <summary>
+    /// Get the string data of the DID following the specifications on
+    /// https://www.w3.org/TR/did-core we take in string data for extensibility
+    /// </summary>
+    /// <param name="DIDIndex">Index of DID</param>
+    /// <returns>String data associated with the DID</returns>
+    public string GetDataOfDID(ulong DIDIndex)
     {
-        return this.Greeting;
+        return this.PersistentState.GetString($"DIDData:{DIDIndex}");
     }
 
-    public string AddGreeting(string helloMessage)
+    /// <summary>
+    /// Set the string data of the DID following the specifications on
+    /// https://www.w3.org/TR/did-core we take in string data for extensibility
+    /// </summary>
+    /// <param name="DIDIndex">Index of DID</param>
+    /// <param name="data">String data associated with the DID</param>
+    private void SetDataOfDID(ulong DIDIndex, string data)
     {
-        this.Greeting = helloMessage;
-        return "Added '" + helloMessage + "' as a greeting.";
+        this.PersistentState.SetString($"DIDData:{DIDIndex}", data);
     }
 
+    //public ulong[] GetOwnerDIDs(Address ownerAddress)
+    //{
+    //    return this.PersistentState.GetArray<ulong>($"DIDArray:{ownerAddress}");
+    //}
+
+    //public void setOwnerDIDs(Address ownerAddress, ulong[] value)
+    //{
+    //    this.PersistentState.SetArray($"DIDArray:{ownerAddress}", value);
+    //}
+
+    public DecentralizedID(ISmartContractState smartContractState)
+        : base(smartContractState)
+    {
+        this.Index = 0;
+        this.SmartContractOwner = this.Message.Sender;
+    }
+
+    /// <summary>
+    /// Create and associate DID
+    /// </summary>
+    /// <param name="data">String data associated with the DID</param>
+    public void CreateDID(string data)
+    {
+        SetDataOfDID(this.Index, data);
+        SetOwnerOfDID(this.Index, this.Message.Sender);
+
+        Log(new CreatedDID { DIDIndex = this.Index, DIDOwner = this.Message.Sender.ToString() });
+
+        this.Index++;
+
+    }
+
+    public void RevokeDID()
+    {
+        // Check if the 
+        S
+    }
+
+    public struct CreatedDID
+    {
+        [Index]
+        public ulong DIDIndex;
+        public string DIDOwner;
+    }
 }
-
-/*
- * Collection of DID Documents as a mesh of connections to verify identity
- * Extended methods like payment to distribute royalties to identities manage
- * by the DID network mesh
- * 
- * DID Document
- * {
- *   "@context": "https://www.w3.org/ns/did/v1",
- *   "id": "did:example:21tDAKCERh95uGgKbJNHYp",
- *   "publicKey": [{
-       "id": "did:example:123456789abcdefghi#keys-1",
-       "type": "RsaVerificationKey2018",
-       "controller": "did:example:123456789abcdefghi",
-       "publicKeyPem": "-----BEGIN PUBLIC KEY...END PUBLIC KEY-----\r\n"
-     }, {
-       "id": "did:example:123456789abcdefghi#keys-2",
-       "type": "Ed25519VerificationKey2018",
-       "controller": "did:example:pqrstuvwxyz0987654321",
-       "publicKeyBase58": "H3C2AVvLMv6gmMNam3uVAjZpfkcJCwDwnZn6z3wXmqPV"
-     }, {
-       "id": "did:example:123456789abcdefghi#keys-3",
-       "type": "Secp256k1VerificationKey2018",
-       "controller": "did:example:123456789abcdefghi",
-       "publicKeyHex": "02b97c30de767f084ce3080168ee293053ba33b235d7116a3263d29f1450936b71"
-     }],
-   }
- *
- *  References
- *  https://w3c.github.io/did-core/
- *  https://selfkey.org/decentralized-identifiers-article/
- */

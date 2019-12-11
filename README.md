@@ -25,7 +25,7 @@ individual control over one's identity instead of relinquishing control
 over to a centralized authority.
 
 
-With a reliable self-soverign identity mechanism, we can provide a more
+<!-- With a reliable self-soverign identity mechanism, we can provide a more
 transparent and truthful ecosystem for payouts. This can increase
 transparency and improve accountability in systems where the flow of
 payments. Such systems include royalty payouts, charity donations,
@@ -34,7 +34,7 @@ companies adopting the
 
 (Note that should privacy be desired, such a payment system should
 be avoided. The system is meant for situations where transparency and
-trust is favored over privacy).
+trust is favored over privacy). -->
 
 
 ## Solution
@@ -59,21 +59,19 @@ of such documents tied to identity would increase the reliability of one's
 decentralized identity.
 
 
-In this project we introduced a payout mechanism for projects.
+<!-- In this project we introduced a payout mechanism for projects.
 Such projects build and augment existing identity documents. The projects
 can refer to media works that are seeking royalty payouts, donations,
 or companies. The more contributors that had contributed payments
 to the project the more reliable the project is at ascertaining the
 identity. Projects are essentially a special kind of identity document
-with payout functionality.
+with payout functionality. -->
 
 
 In order to implement this the decentralized identity mechanism
 we will using recommendations and specifications from
-[https://w3c.github.io/did-core/](https://w3c.github.io/did-core/),
-and provide extensions. The protocol is flexible enough to support
-extensibility which is suited for our use case. We will adopt the
-decentralized identifier scheme as mentioned in the protocol
+[https://w3c.github.io/did-core/](https://w3c.github.io/did-core/).
+We will adopt the decentralized identifier scheme as mentioned in the protocol
 ```
 --- FORMAT ---
 
@@ -127,7 +125,7 @@ announce on their own social profiles that the attacker's account is a
 fraud.  
 
 
-#### Copying Projects
+<!-- #### Copying Projects
 An attacker may copy projects and subsequently seed projects with
 payments to give the impression that the project is valid in order
 to give the impression of a valid profile. A simple way of verifying
@@ -142,7 +140,7 @@ There is also a scenario where a legitimate contributor might have
 contributed to a fake project by accident. The likelihood of this event
 happening can be mitigated with a UX design pattern where prior to
 contribution the contributor is required to verify the identity of the
-owners of the project. 
+owners of the project. -->
 
 
 ### Failure Of Links
