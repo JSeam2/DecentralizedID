@@ -22,15 +22,16 @@ const routing = (
           />
         </Link>
         <div className="header-right">
-          <Link to="/">Config</Link>
-          <Link to="/manage">Manage</Link>
+          {/* <Link to="/">Config</Link> */}
+          {/* <Link to="/manage">Manage</Link> */}
         </div>
       </div>
     </header>
     <div>
       <Switch>
-        <Route exact path="/" component={Config} />
-        <Route path="/manage" component={Manage} />
+        {/* <Route exact path="/" component={Config} /> */}
+        {/* <Route path="/" component={Manage} /> */}
+        <Route exact path="/" component={Generator} />
       </Switch>
     </div>
   </Router>

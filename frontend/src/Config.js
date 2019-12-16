@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import logo from './logo.svg';
 
 function Config() {
   const [contractAddress, setContractAddress] = useState(''); 
@@ -86,7 +85,6 @@ function Config() {
 
             <button 
               type="button" 
-              class="submit"
               onClick={handleSave}
             >
               SAVE

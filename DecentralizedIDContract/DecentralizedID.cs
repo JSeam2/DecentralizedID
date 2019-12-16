@@ -75,20 +75,6 @@ public class DecentralizedID : SmartContract
         this.PersistentState.SetString($"DIDData:{DIDIndex}", data);
     }
 
-    //public ulong[] GetOwnerDIDs(Address ownerAddress)
-    //{
-    //    ulong[] data = this.PersistentState.GetArray<ulong>($"DIDArray:{ownerAddress}");
-
-    //    return data;
-
-    //}
-
-    //public void SetOwnerDIDs(Address ownerAddress, ulong[] value)
-    //{
-    //    //byte[] SerializedData = Serializer.Serialize(value);
-    //    this.PersistentState.SetArray($"DIDArray:{ownerAddress}", value);
-    //}
-
     public DecentralizedID(ISmartContractState smartContractState)
         : base(smartContractState)
     {
@@ -104,12 +90,6 @@ public class DecentralizedID : SmartContract
     {
         SetDataOfDID(this.Index, data);
         SetOwnerOfDID(this.Index, this.Message.Sender);
-
-        // Handle DID Array
-        //ulong[] DIDArray = GetOwnerDIDs(this.Message.Sender);
-        //Array.Resize(ref DIDArray, DIDArray.Length + 1);
-        //DIDArray[DIDArray.Length] = this.Index;
-        //SetOwnerDIDs(this.Message.Sender, DIDArray);
 
         Log(new CreateDIDEvent {
             DIDIndex = this.Index,
@@ -133,12 +113,6 @@ public class DecentralizedID : SmartContract
 
         SetDataOfDID(DIDIndex, "");
         SetOwnerOfDID(DIDIndex, Address.Zero);
-
-        // Handle DID Array
-        //ulong[] DIDArray = GetOwnerDIDs(this.Message.Sender);
-        //int numIndex = Array.IndexOf(DIDArray, DIDIndex);
-        //DIDArray = DIDArray.Where((val, idx) => idx != numIndex).ToArray();
-        //SetOwnerDIDs(this.Message.Sender, DIDArray);
 
         Log(new RevokeDIDEvent
         {

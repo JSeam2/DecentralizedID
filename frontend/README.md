@@ -1,9 +1,9 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Quickstart
-Take note of `.env.development` currently we are using the local swagger API address below. You may need to change this.
+Take note of `.env` currently we are using the local swagger API address below. You may need to change this.
 ```
-API_URL="http://localhost:37223"
+REACT_APP_API_URL="http://localhost:37223"
 ```
 
 ## Available Scripts
