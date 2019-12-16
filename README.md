@@ -1,6 +1,5 @@
 # DecentralizedID (DID) on Stratis
-TODO youtube video demo
-
+[![Youtube image](https://img.youtube.com/vi/Shp43zgsjQc/0.jpg)](https://www.youtube.com/watch?v=Shp43zgsjQc)
 ## Quickstart
 Deploy the smart contract by placing the bytecode below on the Stratis
 dashboard.
