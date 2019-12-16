@@ -120,11 +120,11 @@ partially reliable identity documents pertaining to one's identity.
 The current implementation for the Stratis Hackathon is likely incomplete
 or missing key features. Feel free to submit issues or pull requests.
 
-# Further Works
+## Further Works
 1. Monitoring progress with W3C's DID specification and adopting any new changes. 
 1. Building towards a cross-chain Decentralized Identity system, such that 
 Decentralized Identity Documents may be shared across various blockchains increasing 
 robustness even further.
 
-# Screenshots
+## Screenshots
 ![Generator](images/Generate.png)
