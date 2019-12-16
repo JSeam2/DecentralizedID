@@ -98,7 +98,7 @@ code {
 button {
   display: block;
   border: none;
-  margin-top: 1em;
+  margin-top: 3em;
   margin-bottom: 1em;
   margin: 0 auto;
   width: 360px;
@@ -144,4 +144,13 @@ input {
 
 input:focus {
   border-bottom: 2px solid lightblue;
+}
+
+textarea {
+  font-size: 15px;
+  margin-top: 3em;
+  margin-bottom: 0.7em;
+  height: 3em;
+  width: 100%;
+  text-align: center;
 }

@@ -5,8 +5,10 @@ import { Route, Link, Switch, BrowserRouter as Router } from 'react-router-dom';
 import './index.css';
 import HeaderLogo from './assets/headerlogo.png';
 
-import Config from './Config';
-import Manage from './Manage';
+/* Not used because I can't solve the CORS problem in time */
+// import Config from './Config';
+// import Manage from './Manage';
+import Generator from './Generator'
 
 import * as serviceWorker from './serviceWorker';
 
