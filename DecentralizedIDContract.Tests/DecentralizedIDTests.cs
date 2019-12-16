@@ -5,7 +5,6 @@ using System;
 using System.Reflection;
 using Xunit;
 
-// TODO
 namespace DecentralizedIDContract.Tests
 {
     public class DecentralizedIDTests
@@ -30,7 +29,7 @@ namespace DecentralizedIDContract.Tests
         }
 
         [Theory]
-        [InlineData(nameof(DecentralizedID.Index))]
+        [InlineData(nameof(DecentralizedID.SmartContractOwner))]
         public void Property_Setter_Is_Private(string propertyName)
         {
             Type type = typeof(DecentralizedID);
@@ -38,6 +37,25 @@ namespace DecentralizedIDContract.Tests
             PropertyInfo property = type.GetProperty(propertyName);
 
             Assert.True(property.SetMethod.IsPrivate);
+        }
+
+        [Fact]
+        public void CreateDIDTest()
+        {
+            var contract = new DecentralizedID(this.mockContractState.Object);
+            contract.CreateDID("Test");
+
+            Assert.Matches(contract.GetDataOfDID(0), "Test");
+        }
+
+        [Fact]
+        public void RevokeDIDTest()
+        {
+            var contract = new DecentralizedID(this.mockContractState.Object);
+            contract.CreateDID("Test");
+            contract.RevokeDID(0);
+
+            Assert.DoesNotMatch(contract.GetDataOfDID(0), "Test");
         }
 
         private DecentralizedID NewDecentralizedID()
