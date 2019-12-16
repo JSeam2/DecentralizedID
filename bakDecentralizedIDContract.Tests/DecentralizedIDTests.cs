@@ -1,4 +1,4 @@
-using Moq;
+﻿using Moq;
 using Stratis.SmartContracts;
 using Stratis.SmartContracts.CLR;
 using System;
